@@ -27,7 +27,11 @@ body{margin:0;width:100%;height:600px;overflow:hidden;overscroll-behavior:none;c
 .track{flex:1;height:5px;border-radius:5px;background:rgba(170,182,255,.2);overflow:hidden}
 .track i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 10px rgba(143,160,255,.7);transition:width .5s ease}
 .snd{background:rgba(255,255,255,.1);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:2px 9px;cursor:pointer;font-size:14px;line-height:1.5}
-.pages{position:absolute;left:0;right:0;top:36px;bottom:0;padding:0 10px 10px}
+.pages{position:absolute;left:0;right:0;top:36px;bottom:16px;padding:0 10px 4px}
+.copy{position:absolute;left:0;right:0;bottom:0;height:16px;font-size:10px;line-height:16px;text-align:center;color:rgba(214,220,255,.55);letter-spacing:.04em}
+.namein{font:inherit;font-size:17px;text-align:center;color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:14px;padding:10px 12px;width:100%;max-width:340px;align-self:center;outline:none}
+.namein:focus{border-color:var(--acc);box-shadow:0 0 16px rgba(141,155,255,.45)}
+.namein::placeholder{color:var(--mut)}
 .page{display:none;height:100%;flex-direction:column;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px 12px;overflow:hidden;overflow-y:auto;box-shadow:0 14px 36px rgba(10,12,60,.35)}
 .page.active{display:flex;animation:rise .45s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -84,7 +88,38 @@ p{margin:0}
 .bub{background:linear-gradient(135deg,rgba(141,155,255,.2),rgba(95,224,208,.1));border:1px solid var(--line);border-radius:16px;padding:9px 14px;font-size:15px}
 .bub b{color:var(--gold)}
 /* lampu sorot */
-.scope{position:relative;flex:1;min-height:120px;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#262d7a,#12175a);border:1px solid var(--line)}
+.sbox{position:relative;flex:1;min-height:150px;border-radius:16px;overflow:hidden;background:#0d1033;box-shadow:0 10px 26px rgba(8,10,50,.5)}
+.sbox .scope{border:0;border-radius:0}
+.ohint{position:absolute;left:50%;top:8px;transform:translateX(-50%);z-index:5;max-width:92%;font-size:12.5px;line-height:1.3;color:#fff;background:rgba(20,24,80,.82);border:1px solid rgba(255,217,138,.45);border-radius:12px;padding:4px 12px;pointer-events:none;transition:opacity .6s;text-align:center;width:max-content}
+.ohint.gone{opacity:0}
+.vt{min-height:2.5em;display:flex;align-items:center;justify-content:center}
+.vfoot{flex:none;height:56px;display:flex;align-items:center;justify-content:center;padding-top:10px}
+.vfoot .vstatus{min-height:0}
+.rhint{font-size:13px;color:#e2e7ff;line-height:1.35}
+.scope{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:14px;overflow:hidden;background:#000 center/100% 100% no-repeat;border:1px solid var(--line);touch-action:none;cursor:crosshair}
+.scope.img{background-image:url('https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-Image-32yuo532yuo532yu.png')}
+.scope.img2{background-image:url('https://i.ibb.co.com/8gN08svf/Gemini-Generated-Image-cw1d00cw1d00cw1d.png')}
+.gor{position:absolute;transform:translate(-50%,-50%);font-size:clamp(10px,2.6vw,15px);line-height:1;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));white-space:nowrap}
+.hint{font-size:13px;color:#e2e7ff;background:rgba(255,217,138,.12);border:1px dashed rgba(255,217,138,.45);border-radius:12px;padding:5px 10px}
+.flips.mini .flip{height:108px}
+.flips.mini .face.front .em{font-size:28px}
+.flips.mini .face{padding:6px 8px;gap:2px;font-size:14px}
+.flips.mini .face.back{font-size:12.5px;line-height:1.35}
+.flips.mini .face.back i{font-size:11.5px}
+.fliplab{font-size:14px;color:var(--mut);margin-top:2px}
+.lessonA .pbody{gap:6px}
+.lessonA .sbox{min-height:150px}
+.lessonA .tog button{padding:7px 4px;font-size:14px;line-height:1.3}
+.lessonA .flips.mini .flip{height:70px}
+.lessonA .flips.mini .face.front{flex-direction:row;gap:8px}
+.lessonA .flips.mini .face.front .em{font-size:24px;white-space:nowrap}
+.lessonA .flips.mini .face.front small{display:none}
+.lessonA .hint{padding:4px 10px}
+.spotpg .pbody{gap:7px}
+.spotpg .sbox{min-height:150px}
+.spotpg .cap{min-height:2.7em;font-size:13.5px;line-height:1.35}
+.spotpg .note{padding:6px 10px}
+.lessonA .cap{min-height:2.6em;font-size:13.5px;line-height:1.35}
 .scope .ball{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#fff0c4 55%,#ffd98a);box-shadow:0 0 20px 6px rgba(255,236,170,.6)}
 .scope .mask{position:absolute;inset:0;pointer-events:none}
 .pi{position:absolute;display:flex;flex-direction:column;align-items:center;font-size:22px;line-height:1.2;animation:twk 2.6s ease-in-out infinite}
@@ -117,6 +152,7 @@ p{margin:0}
 .core.go .w{animation-play-state:running}
 .core .w.k{color:var(--gold)}
 .core .w.r{color:var(--rose)}
+.core .w.c{color:var(--acc2)}
 @keyframes wordIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .endstar{font-size:52px;line-height:1;animation:fl 3s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(255,217,138,.7))}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -141,8 +177,8 @@ p{margin:0}
       <div class="pbody">
         <span class="tag">PERMAINAN SERU</span>
         <h1>Misi Bola Putih</h1>
-        <p class="lead">Yuk, main tebak-tebakan seru! Tugas Anda gampang: <b>hitung berapa kali bola putih dioper oleh tim berkaos putih</b>.</p>
-        <div class="note">Videonya hanya diputar <b>satu kali</b> dan tidak bisa dihentikan. Hitung dalam hati ya, jangan bersuara.</div>
+        <p class="lead">Yuk, main tebak-tebakan seru! Tugas Anda gampang:<br><b>hitung berapa kali bola putih dioper oleh tim berkaos putih.</b></p>
+        <div class="note">⚠ Videonya hanya diputar <b>satu kali</b> dan tidak bisa dihentikan. Hitung dalam hati ya, jangan bersuara.</div>
       </div>
       <div class="pfoot"><button class="btn" id="btnAccept">Ayo Mulai →</button></div>
     </section>
@@ -167,7 +203,7 @@ p{margin:0}
     <!-- 3. VIDEO 1 -->
     <section class="page" id="pg-video1">
       <div class="pbody fill">
-        <h2 class="s">Hitung berapa kali bola putih dioper oleh tim berkaos putih?</h2>
+        <h2 class="s vt">Hitung berapa kali bola putih dioper oleh tim berkaos putih?</h2>
         <div class="vwrap nopause" id="vw1">
           <video id="v1" preload="metadata" playsinline webkit-playsinline disablepictureinpicture controlslist="nodownload noremoteplayback"></video>
           <div class="vload hidden" id="vl1">Sedang memuat video…</div>
@@ -182,8 +218,8 @@ p{margin:0}
             <button class="btn" id="v1skip">Lanjut ke pertanyaan →</button>
           </div>
         </div>
-        <p class="vstatus" id="v1status">Tekan tombol kalau Anda sudah siap.</p>
       </div>
+      <div class="vfoot"><p class="vstatus" id="v1status">Tekan tombol kalau Anda sudah siap.</p></div>
     </section>
 
     <!-- 4. PERTANYAAN 1 -->
@@ -205,25 +241,21 @@ p{margin:0}
         <p class="mut" style="margin-top:-6px">kali bola dioper oleh tim berkaos putih</p>
         <p id="r1msg"></p>
         <p class="mut sm" id="r1bet"></p>
-        <div class="bub">Mata Anda terpusat penuh ke tim putih, jadi hitungannya bisa tepat. Tapi, bagaimana dengan hal lain di layar? 👀</div>
+        <div class="bub">Tepat atau belum, selama menghitung mata Anda terus <b>menempel pada bola putih</b>. Nah, apakah ada hal lain di layar yang sempat Anda lihat? 👀</div>
       </div>
       <div class="pfoot"><button class="btn" id="revNext">Lanjut →</button></div>
     </section>
 
     <!-- 6. LAMPU SOROT -->
-    <section class="page" id="pg-spot">
+    <section class="page spotpg" id="pg-spot">
       <div class="pbody fill">
-        <h2>Mata kita seperti lampu sorot 🔦</h2>
-        <div class="scope" id="scope1">
-          <div class="pi" style="left:4%;top:8%"><span>✦</span></div>
-          <div class="pi" style="right:4%;top:8%"><span>✧</span></div>
-          <div class="pi" style="left:4%;bottom:8%"><span>✧</span></div>
-          <div class="pi" style="right:4%;bottom:8%"><span>✦</span></div>
-          <div class="ball"></div><div class="mask"></div>
-        </div>
-        <input type="range" class="rng" id="focusRange" min="0" max="100" value="25" aria-label="Seberapa terpusat perhatian">
-        <div class="rngrow"><span>← Pandangan luas</span><b id="focusVal">25%</b><span>Fokus penuh →</span></div>
+        <h2 class="s">Mata kita seperti lampu sorot 🔦</h2>
+        <div class="sbox"><div class="scope img" id="scope1"><div class="mask"></div></div><div class="ohint">👆 Sentuh gambar untuk memindah lampu</div></div>
+        <p class="rhint">👉 Geser tombol bulat <b>ke kanan</b> untuk memperbesar lampu, <b>ke kiri</b> untuk mengecilkan.</p>
+        <input type="range" class="rng" id="focusRange" min="0" max="100" value="20" aria-label="Besar kecilnya lampu sorot">
+        <div class="rngrow"><span>← Kecilkan lampu</span><b id="focusVal">20%</b><span>Besarkan lampu →</span></div>
         <p class="cap" id="cap1"></p>
+        <div class="note sm">💡 Pemimpin harus <b>fokus pada target</b>, tapi tetap <b>peka</b> pada keadaan tim dan situasi.</div>
       </div>
       <div class="pfoot"><button class="btn" id="spotNext">Lanjut →</button></div>
     </section>
@@ -245,7 +277,7 @@ p{margin:0}
     <!-- 8. VIDEO 2 -->
     <section class="page" id="pg-video2">
       <div class="pbody fill">
-        <h2 class="s">Sekarang, lihat baik-baik ya.</h2>
+        <h2 class="s vt">Sekarang, lihat baik-baik ya.</h2>
         <div class="vwrap" id="vw2">
           <video id="v2" preload="none" playsinline webkit-playsinline controls controlslist="nodownload noremoteplayback"></video>
           <div class="vload hidden" id="vl2">Sedang memuat video…</div>
@@ -259,47 +291,30 @@ p{margin:0}
             <a class="btn ghost" id="v2link" href="#" target="_blank" rel="noopener">Buka video langsung</a>
           </div>
         </div>
-        <p class="vstatus" id="v2status"></p>
       </div>
-      <div class="pfoot"><button class="btn" id="v2next" disabled>Lanjut ke Pelajaran →</button></div>
+      <div class="vfoot"><button class="btn" id="v2next" disabled>Tonton videonya dulu ▶</button></div>
     </section>
 
-    <!-- 9. PELAJARAN A: FOKUS & PERIFERAL -->
-    <section class="page" id="pg-lessonA">
+    <!-- 9. PELAJARAN: SOROT VIDEO + GORILA MANIS/MARAH -->
+    <section class="page lessonA" id="pg-lessonA">
       <div class="pbody fill">
-        <h2>Fokus dan Periferal</h2>
-        <p class="sm mut">🎯 <b>Fokus</b> = yang sedang kita tatap.<br>👁️ <b>Periferal</b> = yang ada di sudut mata.</p>
-        <p class="sm" id="personal"></p>
-        <div class="scope lab" id="scope2">
-          <div class="pi" style="left:4%;top:6%"><span>🦍🍌</span><em>Peluang</em></div>
-          <div class="pi" style="right:4%;top:6%"><span>🦍💢</span><em>Masalah</em></div>
-          <div class="pi" style="left:4%;bottom:6%"><span>🦍💢</span><em>Masalah</em></div>
-          <div class="pi" style="right:4%;bottom:6%"><span>🦍🍌</span><em>Peluang</em></div>
-          <div class="ball"></div><div class="mask"></div>
-        </div>
-        <div class="tog"><button id="tTunnel" class="on">🎯 Fokus</button><button id="tPeri">👁️ Periferal</button></div>
+        <h2 class="s">Coba sorot sekitarnya 🔦</h2>
+        <div class="sbox"><div class="scope img2" id="scope2"><div id="gors"></div><div class="mask"></div></div><div class="ohint">👆 Arahkan jari ke gambar untuk menyorot sekitar</div></div>
+        <div class="tog"><button id="tTunnel" class="on">🎯 Kejar target saja</button><button id="tPeri">🌟 Target + peka sekitar</button></div>
         <p class="cap" id="cap2"></p>
-      </div>
-      <div class="pfoot"><button class="btn" id="aNext">Lanjut →</button></div>
-    </section>
-
-    <!-- 10. PELAJARAN B: GORILA MANIS & MARAH -->
-    <section class="page" id="pg-lessonB">
-      <div class="pbody">
-        <h2>Gorila bisa manis, bisa juga marah</h2>
-        <p class="mut sm">Ketuk kartunya. <b id="flipCount">0/2</b></p>
-        <div class="flips">
+        <p class="fliplab">Ketuk kartu gorilanya: <b id="flipCount">0/2</b></p>
+        <div class="flips mini">
           <div class="flip" tabindex="0" role="button" aria-label="Gorila manis"><div class="fi">
             <div class="face front"><div class="em">🦍🍌</div><b>Gorila manis</b><small>ketuk</small></div>
-            <div class="face back good"><div><b>Peluang!</b><br>Hal kecil yang jika diperhatikan bisa jadi ide atau kemajuan.<br><i>Misal: usul dari anggota tim.</i></div></div>
+            <div class="face back good"><div><b>Peluang!</b> Hal kecil yang bisa jadi kemajuan.</div></div>
           </div></div>
           <div class="flip" tabindex="0" role="button" aria-label="Gorila marah"><div class="fi">
             <div class="face front"><div class="em">🦍💢</div><b>Gorila marah</b><small>ketuk</small></div>
-            <div class="face back bad"><div><b>Masalah!</b><br>Hal remeh yang diabaikan lama-lama membesar.<br><i>Misal: tim kecapekan.</i></div></div>
+            <div class="face back bad"><div><b>Masalah!</b> Hal remeh yang dibiarkan bisa membesar.</div></div>
           </div></div>
         </div>
       </div>
-      <div class="pfoot"><button class="btn ghost" id="bPrev">← Kembali</button><button class="btn" id="bNext">Lanjut →</button></div>
+      <div class="pfoot"><button class="btn" id="aNext">Lanjut →</button></div>
     </section>
 
     <!-- 11. INTINYA -->
@@ -308,13 +323,14 @@ p{margin:0}
         <div class="endstar">🌟</div>
         <h2>Intinya</h2>
         <div class="core" id="core"></div>
-        <p class="mut sm">Jadi, jangan hanya menatap bola. Sesekali lirik juga sudut mata Anda. 👀</p>
+        <p class="mut sm">Tetap tatap bolanya, tapi sesekali lirik sekitarnya. 👀</p>
         <p><b>Terima kasih sudah bermain!</b></p>
       </div>
       <div class="pfoot"><button class="btn ghost" id="eBack">← Kembali</button><button class="btn" id="btnAgain">Main lagi</button></div>
     </section>
 
   </div>
+  <div class="copy">© Education and Training Departement 2026</div>
 </div>
 
 <script>
@@ -327,8 +343,8 @@ try { window.top.postMessage("scoreBarFound", "*"); } catch (e) {}
 
 /* ================= PENGATURAN ================= */
 var CONFIG = {
-  video1: 'https://www.image2url.com/r2/default/videos/1791857078557-283341fe-95fe-4d2f-ad8a-76ea81cee138.mp4',
-  video2: 'https://www.image2url.com/r2/default/videos/1791857204610-b87a9524-6f57-4f00-bdd1-7d641011ee74.mp4',
+  video1: 'https://www.image2url.com/r2/default/videos/1792465405663-a6828795-4f58-4480-8c39-b2d92ea5da58.mp4',
+  video2: 'https://www.image2url.com/r2/default/videos/1792465459378-78b082ce-bf46-46ad-8e69-520ed837ac10.mp4',
   correct: 15,
   options: [12, 13, 14, 15, 16, 17]
 };
@@ -458,31 +474,75 @@ function burstAt(cx, cy, n) {
 function burst(el, n) { if (!el) return; var r = el.getBoundingClientRect(); burstAt(r.left + r.width / 2, r.top + Math.min(r.height / 2, 140), n); }
 
 /* ================= LAMPU SOROT ================= */
+/* Cahaya = lubang transparan di lapisan hitam; gambar/video di belakang terlihat hanya di area yang disorot.
+   Lampu bergerak sendiri, atau mengikuti sentuhan/kursor selama 2,5 detik. */
 function makeScope(root, focus0) {
-  var ball = root.querySelector('.ball'), mask = root.querySelector('.mask'), focus = focus0, target = focus0, last = 0;
+  var mask = root.querySelector('.mask'), focus = focus0, target = focus0, last = 0,
+      px = 50, py = 50, mx = 50, my = 50, manual = 0;
+  function pt(e) {
+    var b = root.getBoundingClientRect(); if (!b.width) return;
+    mx = Math.max(0, Math.min(100, (e.clientX - b.left) / b.width * 100));
+    my = Math.max(0, Math.min(100, (e.clientY - b.top) / b.height * 100));
+    manual = performance.now() + 2500;
+  }
+  root.addEventListener('pointerdown', function (e) { pt(e); try { root.setPointerCapture(e.pointerId); } catch (_) {} });
+  root.addEventListener('pointermove', pt);
   function loop(ts) {
     requestAnimationFrame(loop);
     if (!root.offsetParent || ts - last < 33) return; last = ts;
-    var t = ts / 1000, x = 50 + 30 * Math.sin(t * .8), y = 50 + 17 * Math.sin(t * 1.45 + 1);
-    ball.style.left = x.toFixed(1) + '%'; ball.style.top = y.toFixed(1) + '%';
+    var t = ts / 1000, ax, ay;
+    if (ts < manual) { ax = mx; ay = my; } else { ax = 50 + 30 * Math.sin(t * .6); ay = 50 + 20 * Math.sin(t * 1.1 + 1); }
+    px += (ax - px) * .18; py += (ay - py) * .18;
     focus += (target - focus) * .12;
-    var r = 58 - focus * .5;
-    mask.style.background = 'radial-gradient(circle at ' + x.toFixed(1) + '% ' + y.toFixed(1) + '%,rgba(9,11,44,0) 0,rgba(9,11,44,0) ' + r.toFixed(1) + '%,rgba(9,11,44,.94) ' + (r + 16).toFixed(1) + '%)';
+    var r = 58 - focus * .5, at = px.toFixed(1) + '% ' + py.toFixed(1) + '%';
+    mask.style.background = 'radial-gradient(circle at ' + at + ',rgba(0,0,0,0) 0,rgba(0,0,0,0) ' + r.toFixed(1) + '%,rgba(0,0,0,.6) ' + (r + 6).toFixed(1) + '%,rgba(0,0,0,.97) ' + (r + 14).toFixed(1) + '%)';
   }
   requestAnimationFrame(loop);
   return { set: function (v, instant) { target = v; if (instant) focus = v; } };
 }
-var sc1 = makeScope($('scope1'), 25), sc2 = makeScope($('scope2'), 92);
+var sc1 = makeScope($('scope1'), 80), sc2 = makeScope($('scope2'), 92);
+
+/* Panggung gambar mengikuti rasio asli gambar, jadi gambar tampil utuh (tidak terpotong, tidak gepeng) */
+function fitStage(stage, url) {
+  var box = stage.parentNode, ratio = 16 / 9;
+  function fit() {
+    var w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+    var sw = w, sh = w / ratio; if (sh > h) { sh = h; sw = h * ratio; }
+    stage.style.width = sw + 'px'; stage.style.height = sh + 'px';
+    stage.style.left = ((w - sw) / 2) + 'px'; stage.style.top = ((h - sh) / 2) + 'px';
+  }
+  var im = new Image(); im.onload = function () { if (im.naturalWidth && im.naturalHeight) { ratio = im.naturalWidth / im.naturalHeight; fit(); } }; im.src = url;
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(box); else addEventListener('resize', fit);
+  fit(); return fit;
+}
+document.querySelectorAll('.sbox').forEach(function (b) { b.addEventListener('pointerdown', function () { var h = b.querySelector('.ohint'); if (h) setTimeout(function () { h.classList.add('gone'); }, 1200); }); });
+var fit1 = fitStage($('scope1'), 'https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-Image-32yuo532yuo532yu.png'), fit2 = fitStage($('scope2'), 'https://i.ibb.co.com/8gN08svf/Gemini-Generated-Image-cw1d00cw1d00cw1d.png');
+
+/* Gorila manis & marah: jumlah dan letaknya acak setiap kali halaman dibuka */
+function placeGorillas() {
+  var n = 5 + Math.floor(Math.random() * 4), pts = [], html = '', tries = 0, i, x, y, ok, kind;
+  while (pts.length < n && tries++ < 400) {
+    x = rnd(8, 92); y = rnd(10, 90); ok = true;
+    for (i = 0; i < pts.length; i++) if (Math.hypot(pts[i][0] - x, (pts[i][1] - y) * .6) < 15) { ok = false; break; }
+    if (ok) pts.push([x, y]);
+  }
+  pts.forEach(function (p, j) {
+    kind = j === 0 ? 0 : (j === 1 ? 1 : (Math.random() < .5 ? 0 : 1));   /* minimal 1 manis & 1 marah */
+    html += '<span class="gor" style="left:' + p[0].toFixed(1) + '%;top:' + p[1].toFixed(1) + '%">' + (kind ? '🦍💢' : '🦍🍌') + '</span>';
+  });
+  $('gors').innerHTML = html;
+}
 
 /* ================= NAVIGASI (halaman per halaman) ================= */
-var PAGES = ['intro', 'bet', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'lessonA', 'lessonB', 'end'];
+var PAGES = ['intro', 'bet', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'lessonA', 'end'];
 function go(id) {
-  ['v1', 'v2'].forEach(function (v) { try { if (!$(v).paused && id !== (v === 'v1' ? 'video1' : 'video2')) $(v).pause(); } catch (e) {} });
+  var own = { v1: 'video1', v2: 'video2' };
+  ['v1', 'v2'].forEach(function (v) { try { if (!$(v).paused && id !== own[v]) $(v).pause(); } catch (e) {} });
   document.querySelectorAll('.page').forEach(function (p) { p.classList.toggle('active', p.id === 'pg-' + id); });
   $('bar').style.width = ((PAGES.indexOf(id) + 1) / PAGES.length * 100) + '%';
   if (id === 'q1') preloadV2();
   if (id === 'reveal') buildReveal();
-  if (id === 'spot') { $('cap1').textContent = focusCap(+$('focusRange').value); }
+  if (id === 'spot') { fit1(); $('cap1').textContent = focusCap(+$('focusRange').value); }
   if (id === 'video2') enterVideo2();
   if (id === 'lessonA') enterLessonA();
   if (id === 'end') enterEnd();
@@ -535,9 +595,18 @@ $('q1opts').addEventListener('click', function (e) {
 });
 $('q1next').addEventListener('click', function () { sfx.click(); go('reveal'); });
 
+/* Pesan yang menyesuaikan jawaban yang dipilih */
+function answerMsg(a, d) {
+  if (a == null) return 'Yuk, lihat jawaban yang benar.';
+  var arah = a > CONFIG.correct ? 'kelebihan' : 'kurang';
+  if (d === 0) return '🎯 <b>Tepat sekali!</b> Mata Anda jeli dan hitungan Anda rapi. Hebat!';
+  if (d === 1) return '👏 <b>Nyaris!</b> Anda menjawab ' + a + ' kali, hanya ' + arah + ' 1. Sedikit lagi tepat!';
+  if (d === 2) return '😊 <b>Lumayan dekat!</b> Anda menjawab ' + a + ' kali, ' + arah + ' 2. Bolanya memang cepat sekali.';
+  return '😄 Anda menjawab ' + a + ' kali, ' + arah + ' ' + d + '. <b>Tidak apa-apa</b>, video ini memang sengaja dibuat sulit.';
+}
 function buildReveal() {
   var d = Math.abs((S.ans == null ? CONFIG.correct : S.ans) - CONFIG.correct), el = $('r1num');
-  $('r1msg').innerHTML = d === 0 ? 'Hitungan Anda <b>tepat</b>! Hebat 🎯' : 'Jawaban Anda <b>' + S.ans + ' kali</b>, beda ' + d + '. Tidak apa-apa, memang susah!';
+  $('r1msg').innerHTML = answerMsg(S.ans, d);
   $('r1bet').textContent = S.bet >= 4 ? (d === 0 ? 'Tadi Anda yakin (' + S.bet + ' dari 5), dan hasilnya cocok!' : 'Tadi Anda yakin (' + S.bet + ' dari 5). Yakin belum tentu benar ya 😊') : '';
   sfx.reveal(); burst(el, 26);
   var t0 = performance.now();
@@ -546,12 +615,13 @@ function buildReveal() {
 $('revNext').addEventListener('click', function () { sfx.click(); go('spot'); });
 
 /* ================= 6. LAMPU SOROT (geser) ================= */
+/* slider = besar lampu (kanan makin besar) */
 function focusCap(v) {
-  if (v < 35) return 'Pandangan luas: banyak hal kelihatan, tapi sulit menghitung operan.';
-  if (v < 75) return 'Di tengah-tengah: bola jelas, sekitarnya masih samar.';
-  return 'Fokus penuh: bola terang dan hitungan tepat, tapi bagian pinggir jadi gelap. ✨';
+  if (v < 35) return 'Lampu kecil: yang disorot jelas, tapi sekelilingnya gelap. Seperti hanya mengejar target.';
+  if (v < 70) return 'Lampu sedang: target jelas, sekitarnya mulai terlihat.';
+  return 'Lampu besar: target tetap terlihat, keadaan sekitar juga ikut tertangkap. ✨';
 }
-$('focusRange').addEventListener('input', function () { var v = +this.value; sc1.set(v, true); $('focusVal').textContent = v + '%'; $('cap1').textContent = focusCap(v); });
+$('focusRange').addEventListener('input', function () { var v = +this.value; sc1.set(100 - v, true); $('focusVal').textContent = v + '%'; $('cap1').textContent = focusCap(v); });
 $('spotNext').addEventListener('click', function () { sfx.click(); go('q2'); });
 
 /* ================= 7. PERTANYAAN 2 ================= */
@@ -569,19 +639,19 @@ function enterVideo2() {
   if (v2Init) return; v2Init = true;
   wireVideo({
     v: 'v2', cover: 'vc2', load: 'vl2', err: 've2', link: 'v2link', start: 'v2start', src: CONFIG.video2,
-    onPlaying: function () { $('v2status').textContent = 'Perhatikan baik-baik.'; },
-    onEnded: function () { sfx.reveal(); $('v2status').textContent = 'Nah, sekarang Anda tahu apa yang tadi terlewat.'; $('v2next').disabled = false; },
-    onError: function () { $('v2next').disabled = false; }
+    onPlaying: function () { if ($('v2next').disabled) $('v2next').textContent = 'Perhatikan baik-baik… 👀'; },
+    onEnded: function () { sfx.reveal(); v2Ready(); },
+    onError: v2Ready
   });
 }
+function v2Ready() { $('v2next').disabled = false; $('v2next').textContent = 'Lanjut ke Pelajaran →'; }
 $('v2next').addEventListener('click', function () { sfx.click(); go('lessonA'); });
 
 /* ================= 9-10. PELAJARAN ================= */
-var CAP_F = 'Hanya bola yang terang. Bagian pinggir gelap, jadi yang ada di sana tidak kelihatan.';
-var CAP_P = 'Bola tetap utama, tapi sudut mata menangkap sekitarnya: ada yang manis (peluang), ada yang marah (masalah).';
+var CAP_F = 'Hanya target yang terang. Keadaan tim dan sekitar jadi gelap.';
+var CAP_P = 'Target tetap terlihat, sekitarnya juga. Gorilanya ketemu!';
 function enterLessonA() {
-  startAmbient();
-  $('personal').textContent = S.gorilla === 'ya' ? 'Tadi Anda melihat gorila. Hebat!' : 'Tadi Anda tidak melihat gorila. Wajar, separuh orang juga begitu.';
+  startAmbient(); placeGorillas(); fit2();
   $('cap2').textContent = $('tPeri').classList.contains('on') ? CAP_P : CAP_F;
 }
 $('tTunnel').addEventListener('click', function () {
@@ -590,7 +660,7 @@ $('tTunnel').addEventListener('click', function () {
 $('tPeri').addEventListener('click', function () {
   $('tPeri').classList.add('on'); $('tTunnel').classList.remove('on'); $('scope2').classList.add('peri'); sc2.set(14); sfx.bell(); burst($('scope2'), 24); $('cap2').textContent = CAP_P;
 });
-$('aNext').addEventListener('click', function () { sfx.click(); go('lessonB'); });
+$('aNext').addEventListener('click', function () { sfx.click(); go('end'); });
 
 var flips = 0;
 function flipToggle(el) {
@@ -601,22 +671,20 @@ document.querySelectorAll('.flip').forEach(function (f) {
   f.addEventListener('click', function () { flipToggle(f); });
   f.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipToggle(f); } });
 });
-$('bPrev').addEventListener('click', function () { sfx.click(); go('lessonA'); });
-$('bNext').addEventListener('click', function () { sfx.click(); go('end'); });
 
-/* ================= 11. INTINYA ================= */
-var CORE = 'Fokus itu penting. Tapi kalau terlalu fokus, kita abai pada hal remeh di sekitar: bisa jadi gorila marah (masalah) atau gorila manis (peluang).';
+/* ================= 10. INTINYA ================= */
+var CORE = 'Fokus pada target itu wajib. Tapi jangan sampai kita tidak peduli pada sekitar: keadaan tim dan situasi.';
 var coreBuilt = false;
 function enterEnd() {
   if (!coreBuilt) {
     coreBuilt = true;
-    $('core').innerHTML = CORE.split(' ').map(function (w, i) { var k = /manis|peluang/i.test(w) ? ' k' : (/marah|masalah/i.test(w) ? ' r' : ''); return '<span class="w' + k + '" style="animation-delay:' + (i * .09).toFixed(2) + 's">' + w + '</span>'; }).join(' ');
+    $('core').innerHTML = CORE.split(' ').map(function (w, i) { var k = /manis|peluang/i.test(w) ? ' k' : (/marah|masalah/i.test(w) ? ' r' : (/^(target|sekitar|tim|situasi)/i.test(w) ? ' c' : '')); return '<span class="w' + k + '" style="animation-delay:' + (i * .09).toFixed(2) + 's">' + w + '</span>'; }).join(' ');
   }
   $('core').classList.add('go');
   sfx.done(); burst($('pg-end').querySelector('.endstar'), 34); shootNow(); setTimeout(shootNow, 700);
   setTimeout(function () { stopAmbient(5); }, 3000);
 }
-$('eBack').addEventListener('click', function () { sfx.click(); go('lessonB'); });
+$('eBack').addEventListener('click', function () { sfx.click(); go('lessonA'); });
 $('btnAgain').addEventListener('click', function () { location.reload(); });
 
 pub();
