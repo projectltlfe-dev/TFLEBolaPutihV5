@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Misi Bola Putih</title>
+<title>Misi Bola Basket</title>
 <style>
 :root{--ink:#eef1ff;--mut:#b9c1f0;--acc:#8d9bff;--acc2:#5fe0d0;--gold:#ffd98a;--rose:#ff9fc8;--card:rgba(32,36,98,.82);--line:rgba(170,182,255,.3);--ok:#6fe8c4}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -26,7 +26,13 @@ body{margin:0;width:100%;height:600px;overflow:hidden;overscroll-behavior:none;c
 .brand{font-size:11px;letter-spacing:.2em;color:var(--mut);font-weight:700;white-space:nowrap}
 .track{flex:1;height:5px;border-radius:5px;background:rgba(170,182,255,.2);overflow:hidden}
 .track i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 10px rgba(143,160,255,.7);transition:width .5s ease}
-.snd{background:rgba(255,255,255,.1);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:2px 9px;cursor:pointer;font-size:14px;line-height:1.5}
+.snd{background:rgba(255,255,255,.1);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:2px 9px;cursor:pointer;font-size:14px;line-height:1.5;white-space:nowrap;flex:none}
+.snd.bgm{font-size:11.5px;font-weight:700;letter-spacing:.03em;padding:3px 9px;background:linear-gradient(90deg,rgba(123,109,255,.45),rgba(63,201,189,.35));border-color:rgba(141,155,255,.6)}
+.snd.bgm.off{background:rgba(255,255,255,.06);color:var(--mut);border-color:var(--line)}
+@media (max-width:340px){.brand{letter-spacing:.08em;font-size:10px}}
+.namein{font:inherit;font-size:17px;text-align:center;color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:14px;padding:10px 12px;width:100%;max-width:340px;align-self:center;outline:none}
+.namein:focus{border-color:var(--acc);box-shadow:0 0 16px rgba(141,155,255,.45)}
+.namein::placeholder{color:var(--mut)}
 .pages{position:absolute;left:0;right:0;top:36px;bottom:16px;padding:0 10px 4px}
 .copy{position:absolute;left:0;right:0;bottom:0;height:16px;font-size:10px;line-height:16px;text-align:center;color:rgba(214,220,255,.55);letter-spacing:.04em}
 .namein{font:inherit;font-size:17px;text-align:center;color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:14px;padding:10px 12px;width:100%;max-width:340px;align-self:center;outline:none}
@@ -95,11 +101,37 @@ p{margin:0}
 .vt{min-height:2.5em;display:flex;align-items:center;justify-content:center}
 .vfoot{flex:none;height:56px;display:flex;align-items:center;justify-content:center;padding-top:10px}
 .vfoot .vstatus{min-height:0}
+.hl{background:linear-gradient(120deg,#ffd98a,#ffb8e0);color:#2a1c5c;padding:0 6px;border-radius:7px;font-weight:800;-webkit-box-decoration-break:clone;box-decoration-break:clone;white-space:nowrap}
+.namehint{font-size:13px;color:var(--gold);margin-top:-4px}
+.namein.err{border-color:var(--rose);box-shadow:0 0 16px rgba(255,159,200,.5);animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+/* popup distraksi di atas video 1 */
+.vpop{position:absolute;z-index:2;left:0;right:0;margin:0 auto;width:max-content;max-width:86%;padding:8px 16px;border-radius:16px;font-weight:800;font-size:clamp(15px,4.2vw,19px);line-height:1.3;text-align:center;color:#2a1c5c;background:linear-gradient(120deg,#ffe7a3,#ffc3e6 60%,#bfe9ff);box-shadow:0 10px 26px rgba(0,0,0,.45),0 0 0 3px rgba(255,255,255,.35);pointer-events:none;opacity:0;transform:scale(.6) rotate(-4deg);transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.vpop.on{opacity:1;transform:scale(1) rotate(var(--rot,-2deg));animation:wob 1.1s ease-in-out .35s infinite}
+@keyframes wob{0%,100%{transform:scale(1) rotate(var(--rot,-2deg))}50%{transform:scale(1.06) rotate(calc(var(--rot,-2deg) * -1))}}
+/* komparasi jawaban */
+.cmp{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.cmpc{border-radius:18px;padding:10px 6px 8px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
+.cmpc small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--mut);text-transform:uppercase}
+.cmpc .cnum{font-family:Georgia,serif;font-weight:700;line-height:1.05;font-size:clamp(54px,17vw,80px)}
+.cmpc span{font-size:13px;color:var(--mut)}
+.cmpc.you{border-color:rgba(255,159,200,.55);background:linear-gradient(160deg,rgba(255,143,177,.22),rgba(255,160,100,.08))}
+.cmpc.you .cnum{color:var(--rose)}
+.cmpc.ok{border-color:rgba(255,217,138,.6);background:linear-gradient(160deg,rgba(255,217,138,.22),rgba(95,224,208,.1));box-shadow:0 0 22px rgba(255,217,138,.25)}
+.cmpc.ok .cnum{background:linear-gradient(180deg,#fff3cf,#ffb8e0 55%,#9aa8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cmp .vs{font-size:22px;font-weight:800;color:var(--mut)}
+.fb{border-radius:16px;padding:10px 14px;font-size:15px;line-height:1.45;border:1px solid var(--line);background:linear-gradient(135deg,rgba(141,155,255,.24),rgba(95,224,208,.12));animation:rise .45s ease both}
+.fb.no{background:linear-gradient(135deg,rgba(255,143,177,.24),rgba(255,217,138,.12))}
+.vfoot{gap:10px}
+.btn.back{padding:11px 16px;flex:none}
+@media (max-width:400px){.btn.back .bk{display:none}.btn.back{padding:11px 15px}}
+.vfoot .vstatus{flex:0 1 auto;min-width:0;line-height:1.3}
+.vfoot .btn{white-space:nowrap}
+@media (max-width:400px){.vfoot .vstatus{font-size:12.5px;text-align:left}.vfoot .btn:not(.back){padding:11px 16px;font-size:15px}}
 .rhint{font-size:13px;color:#e2e7ff;line-height:1.35}
 .scope{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:14px;overflow:hidden;background:#000 center/100% 100% no-repeat;border:1px solid var(--line);touch-action:none;cursor:crosshair}
 .scope.img{background-image:url('https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-Image-32yuo532yuo532yu.png')}
 .scope.img2{background-image:url('https://i.ibb.co.com/8gN08svf/Gemini-Generated-Image-cw1d00cw1d00cw1d.png')}
-.gor{position:absolute;transform:translate(-50%,-50%);font-size:clamp(10px,2.6vw,15px);line-height:1;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));white-space:nowrap}
 .hint{font-size:13px;color:#e2e7ff;background:rgba(255,217,138,.12);border:1px dashed rgba(255,217,138,.45);border-radius:12px;padding:5px 10px}
 .flips.mini .flip{height:108px}
 .flips.mini .face.front .em{font-size:28px}
@@ -107,19 +139,10 @@ p{margin:0}
 .flips.mini .face.back{font-size:12.5px;line-height:1.35}
 .flips.mini .face.back i{font-size:11.5px}
 .fliplab{font-size:14px;color:var(--mut);margin-top:2px}
-.lessonA .pbody{gap:6px}
-.lessonA .sbox{min-height:150px}
-.lessonA .tog button{padding:7px 4px;font-size:14px;line-height:1.3}
-.lessonA .flips.mini .flip{height:70px}
-.lessonA .flips.mini .face.front{flex-direction:row;gap:8px}
-.lessonA .flips.mini .face.front .em{font-size:24px;white-space:nowrap}
-.lessonA .flips.mini .face.front small{display:none}
-.lessonA .hint{padding:4px 10px}
 .spotpg .pbody{gap:7px}
 .spotpg .sbox{min-height:150px}
 .spotpg .cap{min-height:2.7em;font-size:13.5px;line-height:1.35}
 .spotpg .note{padding:6px 10px}
-.lessonA .cap{min-height:2.6em;font-size:13.5px;line-height:1.35}
 .scope .ball{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#fff0c4 55%,#ffd98a);box-shadow:0 0 20px 6px rgba(255,236,170,.6)}
 .scope .mask{position:absolute;inset:0;pointer-events:none}
 .pi{position:absolute;display:flex;flex-direction:column;align-items:center;font-size:22px;line-height:1.2;animation:twk 2.6s ease-in-out infinite}
@@ -154,9 +177,20 @@ p{margin:0}
 .core .w.r{color:var(--rose)}
 .core .w.c{color:var(--acc2)}
 @keyframes wordIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.takes{display:flex;flex-direction:column;gap:10px;text-align:left}
+.take{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);opacity:0;transform:translateY(14px)}
+.take p{margin:0;font-size:clamp(16px,4.3vw,19px);line-height:1.45}
+.take .ti{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.1)}
+.take.t1{background:linear-gradient(135deg,rgba(255,217,138,.2),rgba(255,184,224,.08));border-color:rgba(255,217,138,.45)}
+.take.t2{background:linear-gradient(135deg,rgba(95,224,208,.2),rgba(141,155,255,.1));border-color:rgba(95,224,208,.45)}
+.take .kw{color:var(--gold)}
+.take .kw2{color:var(--acc2)}
+.takes.go .take{animation:rise .6s ease forwards}
+.takes.go .t2{animation-delay:.7s}
+.thanks{font-weight:700;margin-top:4px}
 .endstar{font-size:52px;line-height:1;animation:fl 3s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(255,217,138,.7))}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.core .w{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.take{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -165,9 +199,9 @@ p{margin:0}
 
 <div id="app">
   <div class="topbar">
-    <div class="brand">MISI BOLA PUTIH</div>
+    <div class="brand">MISI BOLA BASKET</div>
     <div class="track"><i id="bar"></i></div>
-    <button class="snd" id="sndBtn" aria-label="Suara">🔊</button>
+    <button class="snd bgm" id="bgmBtn" aria-label="Suara dan musik latar" aria-pressed="true">🔊 BGM ON</button>
   </div>
 
   <div class="pages">
@@ -176,8 +210,10 @@ p{margin:0}
     <section class="page" id="pg-intro">
       <div class="pbody">
         <span class="tag">PERMAINAN SERU</span>
-        <h1>Misi Bola Putih</h1>
-        <p class="lead">Yuk, main tebak-tebakan seru! Tugas Anda gampang:<br><b>hitung berapa kali bola putih dioper oleh tim berkaos putih.</b></p>
+        <h1>Misi Bola Basket</h1>
+        <p class="lead">Yuk, main tebak-tebakan seru! Tugas kamu gampang:<br>hitung berapa kali <span class="hl">bola dioper</span> oleh tim <span class="hl">kaos putih</span>.</p>
+        <input class="namein" id="nameIn" type="text" maxlength="24" autocomplete="off" placeholder="✍️ Tulis namamu di sini" aria-label="Nama kamu" required>
+        <p class="namehint hidden" id="nameHint">Tulis namamu dulu ya 😊</p>
         <div class="note">⚠ Videonya hanya diputar <b>satu kali</b> dan tidak bisa dihentikan. Hitung dalam hati ya, jangan bersuara.</div>
       </div>
       <div class="pfoot"><button class="btn" id="btnAccept">Ayo Mulai →</button></div>
@@ -187,7 +223,8 @@ p{margin:0}
     <section class="page" id="pg-bet">
       <div class="pbody">
         <span class="tag">TEBAK DIRI SENDIRI</span>
-        <h2>Seberapa yakin Anda bisa menghitung dengan benar?</h2>
+        <p class="lead hidden" id="helloRow">Halo, <b id="hello" style="color:var(--gold)"></b>! 👋</p>
+        <h2>Seberapa yakin kamu bisa menghitung dengan benar?</h2>
         <p class="mut sm">Pilih dulu sebelum videonya mulai.</p>
         <div class="bets" id="bets">
           <button data-v="1"><b>1</b><small>Ragu</small></button>
@@ -197,15 +234,16 @@ p{margin:0}
           <button data-v="5"><b>5</b><small>Yakin sekali</small></button>
         </div>
       </div>
-      <div class="pfoot"><button class="btn" id="btnBet" disabled>Simpan Pilihan ✔</button></div>
+      <div class="pfoot"><button class="btn ghost back" data-back="intro" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="btnBet" disabled>Simpan Pilihan ✔</button></div>
     </section>
 
     <!-- 3. VIDEO 1 -->
     <section class="page" id="pg-video1">
       <div class="pbody fill">
-        <h2 class="s vt">Hitung berapa kali bola putih dioper oleh tim berkaos putih?</h2>
+        <h2 class="s vt"><span>Hitung berapa kali <span class="hl">bola dioper</span> oleh tim <span class="hl">kaos putih</span>!</span></h2>
         <div class="vwrap nopause" id="vw1">
           <video id="v1" preload="metadata" playsinline webkit-playsinline disablepictureinpicture controlslist="nodownload noremoteplayback"></video>
+          <div class="vpop" id="vpop" aria-live="polite"></div>
           <div class="vload hidden" id="vl1">Sedang memuat video…</div>
           <div class="vcover" id="vc1">
             <h3>🎯 Siapkan mata dan hitungan</h3>
@@ -219,31 +257,38 @@ p{margin:0}
           </div>
         </div>
       </div>
-      <div class="vfoot"><p class="vstatus" id="v1status">Tekan tombol kalau Anda sudah siap.</p></div>
+      <div class="vfoot"><button class="btn ghost back" id="v1back" data-back="bet" aria-label="Kembali">←<span class="bk"> Kembali</span></button><p class="vstatus" id="v1status">Tekan tombol kalau kamu sudah siap.</p></div>
     </section>
 
     <!-- 4. PERTANYAAN 1 -->
     <section class="page" id="pg-q1">
       <div class="pbody">
         <span class="tag">PERTANYAAN 1</span>
-        <h2>Berapa kali tim putih mengoper bola?</h2>
+        <h2>Berapa kali <span class="hl">bola dioper</span> oleh tim <span class="hl">kaos putih</span>?</h2>
         <div class="opts6" id="q1opts"></div>
         <p class="okmsg" id="q1msg"></p>
       </div>
-      <div class="pfoot"><button class="btn" id="q1next" disabled>Lihat jawaban benar →</button></div>
+      <div class="pfoot"><button class="btn" id="q1next" disabled>Kunci & lihat jawaban →</button></div>
     </section>
 
     <!-- 5. JAWABAN BENAR -->
     <section class="page" id="pg-reveal">
       <div class="pbody">
-        <span class="tag">JAWABAN YANG BENAR</span>
-        <div class="big" id="r1num">0</div>
-        <p class="mut" style="margin-top:-6px">kali bola dioper oleh tim berkaos putih</p>
+        <span class="tag" id="r1tag">JAWABAN YANG BENAR</span>
+        <div id="rOne">
+          <div class="big" id="r1num">0</div>
+          <p class="mut">kali bola dioper oleh tim kaos putih</p>
+        </div>
+        <div class="cmp hidden" id="rCmp">
+          <div class="cmpc you"><small>Jawaban kamu</small><div class="cnum" id="rYou">0</div><span>kali</span></div>
+          <div class="vs">≠</div>
+          <div class="cmpc ok"><small>Jawaban benar</small><div class="cnum" id="rOk">0</div><span>kali</span></div>
+        </div>
         <p id="r1msg"></p>
         <p class="mut sm" id="r1bet"></p>
-        <div class="bub">Tepat atau belum, selama menghitung mata Anda terus <b>menempel pada bola putih</b>. Nah, apakah ada hal lain di layar yang sempat Anda lihat? 👀</div>
+        <div class="bub">Tepat atau belum, selama menghitung mata kamu terus <b>menempel pada bola</b>. Nah, apakah ada hal lain di layar yang sempat kamu lihat? 👀</div>
       </div>
-      <div class="pfoot"><button class="btn" id="revNext">Lanjut →</button></div>
+      <div class="pfoot"><button class="btn ghost back" data-back="q1" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="revNext">Lanjut →</button></div>
     </section>
 
     <!-- 6. LAMPU SOROT -->
@@ -257,7 +302,7 @@ p{margin:0}
         <p class="cap" id="cap1"></p>
         <div class="note sm">💡 Pemimpin harus <b>fokus pada target</b>, tapi tetap <b>peka</b> pada keadaan tim dan situasi.</div>
       </div>
-      <div class="pfoot"><button class="btn" id="spotNext">Lanjut →</button></div>
+      <div class="pfoot"><button class="btn ghost back" data-back="reveal" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="spotNext">Lanjut →</button></div>
     </section>
 
     <!-- 7. PERTANYAAN 2 -->
@@ -269,21 +314,21 @@ p{margin:0}
           <button class="opt" data-v="ya"><b>🦍 Ya</b><small>Saya melihatnya</small></button>
           <button class="opt" data-v="tidak"><b>🙈 Tidak</b><small>Saya tidak melihatnya</small></button>
         </div>
-        <p class="okmsg" id="q2msg"></p>
+        <div class="fb hidden" id="q2fb"></div>
       </div>
-      <div class="pfoot"><button class="btn" id="q2next" disabled>Lanjut ke video 2 →</button></div>
+      <div class="pfoot"><button class="btn ghost back" data-back="spot" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="q2next" disabled>Kunci jawaban ✔</button></div>
     </section>
 
     <!-- 8. VIDEO 2 -->
     <section class="page" id="pg-video2">
       <div class="pbody fill">
-        <h2 class="s vt">Sekarang, lihat baik-baik ya.</h2>
+        <h2 class="s vt" id="v2title">Sekarang, lihat baik-baik ya.</h2>
         <div class="vwrap" id="vw2">
           <video id="v2" preload="none" playsinline webkit-playsinline controls controlslist="nodownload noremoteplayback"></video>
           <div class="vload hidden" id="vl2">Sedang memuat video…</div>
           <div class="vcover" id="vc2">
-            <h3>✨ Kita lihat sekali lagi</h3>
-            <p class="mut sm">Kali ini tidak perlu menghitung apa-apa.</p>
+            <h3>🦍 Siap cari gorilanya?</h3>
+            <p class="mut sm">Tidak perlu menghitung, cukup perhatikan.</p>
             <button class="btn" id="v2start">▶ Putar video</button>
           </div>
           <div class="verr hidden" id="ve2">
@@ -292,41 +337,21 @@ p{margin:0}
           </div>
         </div>
       </div>
-      <div class="vfoot"><button class="btn" id="v2next" disabled>Tonton videonya dulu ▶</button></div>
-    </section>
-
-    <!-- 9. PELAJARAN: SOROT VIDEO + GORILA MANIS/MARAH -->
-    <section class="page lessonA" id="pg-lessonA">
-      <div class="pbody fill">
-        <h2 class="s">Coba sorot sekitarnya 🔦</h2>
-        <div class="sbox"><div class="scope img2" id="scope2"><div id="gors"></div><div class="mask"></div></div><div class="ohint">👆 Arahkan jari ke gambar untuk menyorot sekitar</div></div>
-        <div class="tog"><button id="tTunnel" class="on">🎯 Kejar target saja</button><button id="tPeri">🌟 Target + peka sekitar</button></div>
-        <p class="cap" id="cap2"></p>
-        <p class="fliplab">Ketuk kartu gorilanya: <b id="flipCount">0/2</b></p>
-        <div class="flips mini">
-          <div class="flip" tabindex="0" role="button" aria-label="Gorila manis"><div class="fi">
-            <div class="face front"><div class="em">🦍🍌</div><b>Gorila manis</b><small>ketuk</small></div>
-            <div class="face back good"><div><b>Peluang!</b> Hal kecil yang bisa jadi kemajuan.</div></div>
-          </div></div>
-          <div class="flip" tabindex="0" role="button" aria-label="Gorila marah"><div class="fi">
-            <div class="face front"><div class="em">🦍💢</div><b>Gorila marah</b><small>ketuk</small></div>
-            <div class="face back bad"><div><b>Masalah!</b> Hal remeh yang dibiarkan bisa membesar.</div></div>
-          </div></div>
-        </div>
-      </div>
-      <div class="pfoot"><button class="btn" id="aNext">Lanjut →</button></div>
+      <div class="vfoot"><button class="btn ghost back" data-back="q2" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="v2next" disabled>Tonton videonya dulu ▶</button></div>
     </section>
 
     <!-- 11. INTINYA -->
     <section class="page" id="pg-end">
       <div class="pbody">
         <div class="endstar">🌟</div>
-        <h2>Intinya</h2>
-        <div class="core" id="core"></div>
-        <p class="mut sm">Tetap tatap bolanya, tapi sesekali lirik sekitarnya. 👀</p>
-        <p><b>Terima kasih sudah bermain!</b></p>
+        <h2 id="endTitle">Intinya</h2>
+        <div class="takes" id="takes">
+          <div class="take t1"><span class="ti">🎯</span><p>Fokus pada <b class="kw">target</b> itu <b>wajib</b>.</p></div>
+          <div class="take t2"><span class="ti">👀</span><p>Tapi jangan sampai kita <b>tidak peduli</b> pada <b class="kw2">keadaan tim</b> dan <b class="kw2">keadaan situasi</b>.</p></div>
+        </div>
+        <p class="thanks">Terima kasih sudah bermain<span id="endName"></span>! 🏀</p>
       </div>
-      <div class="pfoot"><button class="btn ghost" id="eBack">← Kembali</button><button class="btn" id="btnAgain">Main lagi</button></div>
+      <div class="pfoot"><button class="btn ghost back" id="eBack" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="btnAgain" style="white-space:nowrap">Main lagi 🔁</button></div>
     </section>
 
   </div>
@@ -346,12 +371,14 @@ var CONFIG = {
   video1: 'https://www.image2url.com/r2/default/videos/1792465405663-a6828795-4f58-4480-8c39-b2d92ea5da58.mp4',
   video2: 'https://www.image2url.com/r2/default/videos/1792465459378-78b082ce-bf46-46ad-8e69-520ed837ac10.mp4',
   correct: 15,
+  video2Start: 1,   /* video 2 diputar mulai detik ke-1 (detik 0-1 dipotong) */
   options: [12, 13, 14, 15, 16, 17]
 };
-var S = { bet: 0, ans: null, gorilla: null };
+var S = { name: '', bet: 0, ans: null, gorilla: null };
 function $(id) { return document.getElementById(id); }
 function rnd(a, b) { return a + Math.random() * (b - a); }
-function pub() { window.__gameResult = { bet: S.bet, answer: S.ans, correct: CONFIG.correct, isCorrect: S.ans === CONFIG.correct, sawGorilla: S.gorilla }; }
+function nm() { return S.name || 'kamu'; }
+function pub() { window.__gameResult = { name: S.name, bet: S.bet, answer: S.ans, correct: CONFIG.correct, isCorrect: S.ans === CONFIG.correct, sawGorilla: S.gorilla }; }
 var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ================= SUARA ================= */
@@ -378,52 +405,70 @@ var sfx = {
   note: function () { tone([784, 880, 988, 1175][Math.floor(Math.random() * 4)], 1.4, .03); }
 };
 
-/* suasana tenang untuk bagian pelajaran */
-var amb = null, ambWanted = false;
-function makeReverb(c) {
-  var len = Math.floor(c.sampleRate * 2.2), buf = c.createBuffer(2, len, c.sampleRate), ch, i, d;
-  for (ch = 0; ch < 2; ch++) { d = buf.getChannelData(ch); for (i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
-  var cv = c.createConvolver(); cv.buffer = buf; return cv;
+/* ================= BGM: musik latar ceria bernuansa basket (dibuat langsung dengan Web Audio, tanpa file) =================
+   Kick "bola memantul", tepuk tangan, hi-hat, bass, dan melodi marimba. Senyap otomatis saat video diputar. */
+var bgmOn = true, bgmDuck = false, bgm = null;
+var TEMPO = 112, STEP = 60 / TEMPO / 2;                 /* satu langkah = 1/8 ketukan */
+var BASS = [130.81, 98, 110, 87.31];                     /* C3 G2 A2 F2 (dimainkan 1-2 oktaf) */
+var CH = [[261.63, 329.63, 392], [246.94, 293.66, 392], [220, 261.63, 329.63], [220, 261.63, 349.23]];
+var C5 = 523.25, D5 = 587.33, E5 = 659.25, G5 = 783.99, A5 = 880, C6 = 1046.5;
+var MEL = [[E5, G5, A5, G5, E5, 0, C5, D5], [D5, 0, G5, 0, A5, G5, E5, D5], [C5, E5, A5, 0, G5, E5, D5, C5], [A5, 0, G5, E5, D5, 0, C5, 0],
+           [E5, E5, G5, 0, A5, C6, A5, G5], [D5, 0, G5, A5, G5, 0, E5, 0], [C5, E5, A5, C6, A5, G5, E5, 0], [D5, E5, D5, C5, 0, 0, C5, 0]];
+function env(g, t, peak, dec) { g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + .006); g.gain.exponentialRampToValueAtTime(0.0001, t + dec); }
+function osc(type, f, t, dur, peak, dest, dec) {
+  var c = bgm.c, o = c.createOscillator(), g = c.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t); env(g, t, peak, dec || dur);
+  o.connect(g); g.connect(dest); o.start(t); o.stop(t + dur + .05); return o;
 }
-function bell(f) {
-  var a = amb; if (!a) return;
-  var c = a.c, t = c.currentTime, o = c.createOscillator(), g = c.createGain();
-  o.type = 'sine'; o.frequency.value = f;
-  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(.03, t + .04); g.gain.exponentialRampToValueAtTime(0.0001, t + 3.4);
-  o.connect(g); g.connect(a.rv); g.connect(a.master); o.start(t); o.stop(t + 3.6);
+function noise(t, peak, dec, ftype, freq, dest) {
+  var c = bgm.c, n = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+  n.buffer = bgm.nbuf; f.type = ftype; f.frequency.value = freq; env(g, t, peak, dec);
+  n.connect(f); f.connect(g); g.connect(dest); n.start(t); n.stop(t + dec + .05);
 }
-function startAmbient() {
-  ambWanted = true; if (muted || amb) return;
+function kick(t) { var o = osc('sine', 150, t, .32, .9, bgm.mix); o.frequency.exponentialRampToValueAtTime(48, t + .28); }
+function marimba(f, t) { osc('sine', f, t, .5, .22, bgm.mix, .45); osc('sine', f * 4, t, .12, .05, bgm.mix, .1); }
+function bgmTick() {
+  var c = bgm.c;
+  while (bgm.next < c.currentTime + .35) {
+    var t = bgm.next, st = bgm.step % 8, bar = Math.floor(bgm.step / 8), ch = bar % 4, i;
+    if (st === 0 || st === 4 || (st === 7 && ch === 3)) kick(t);
+    if (st === 2 || st === 6) noise(t, .32, .16, 'bandpass', 1700, bgm.mix);   /* tepuk */
+    noise(t, st % 2 ? .05 : .09, .045, 'highpass', 7500, bgm.mix);              /* hi-hat */
+    if (st === 0 || st === 3 || st === 4 || st === 6) osc('triangle', BASS[ch] * (st === 3 ? 2 : 1), t, .22, .32, bgm.mix, .2);
+    if (st === 0) for (i = 0; i < 3; i++) osc('triangle', CH[ch][i], t, STEP * 7, .07, bgm.mix, STEP * 7);
+    if (st === 4) for (i = 0; i < 3; i++) osc('triangle', CH[ch][i], t, STEP * 3, .05, bgm.mix, STEP * 3);
+    var m = MEL[bar % 8][st]; if (m) marimba(m, t);
+    bgm.next += STEP; bgm.step++;
+  }
+}
+function bgmLevel() { return (bgmOn && !bgmDuck) ? .85 : .0001; }
+function bgmApply(sec) {
+  if (!bgm) return; var g = bgm.master.gain, t = bgm.c.currentTime;
+  g.cancelScheduledValues(t); g.setValueAtTime(Math.max(.0001, g.value), t); g.exponentialRampToValueAtTime(bgmLevel(), t + (sec || .8));
+}
+function bgmStart() {
   var c = ac(); if (!c) return;
-  var master = c.createGain(), rv = makeReverb(c), wet = c.createGain(), lp = c.createBiquadFilter(), nodes = [];
-  master.gain.setValueAtTime(.0001, c.currentTime); master.gain.exponentialRampToValueAtTime(.5, c.currentTime + 5);
-  master.connect(c.destination); wet.gain.value = .55; rv.connect(wet); wet.connect(master);
-  lp.type = 'lowpass'; lp.frequency.value = 1100; lp.connect(master); lp.connect(rv);
-  [73.42, 110, 146.83, 220, 329.63].forEach(function (f, i) {
-    [-4, 4].forEach(function (dt) {
-      var o = c.createOscillator(), g = c.createGain(), l = c.createOscillator(), lg = c.createGain();
-      o.type = 'sine'; o.frequency.value = f; o.detune.value = dt;
-      g.gain.value = i < 2 ? .05 : .028; l.frequency.value = .04 + Math.random() * .08; lg.gain.value = g.gain.value * .6;
-      l.connect(lg); lg.connect(g.gain); o.connect(g); g.connect(lp); o.start(); l.start(); nodes.push(o, l);
-    });
-  });
-  amb = { c: c, master: master, rv: rv, nodes: nodes, timer: 0 };
-  (function chime() {
-    if (!amb) return;
-    bell([587.33, 659.25, 739.99, 880, 987.77, 1174.66][Math.floor(Math.random() * 6)]);
-    amb.timer = setTimeout(chime, rnd(3800, 8000));
-  })();
+  if (bgm) { bgmApply(); return; }
+  var master = c.createGain(), comp = c.createDynamicsCompressor(), mix = c.createGain(), an = c.createAnalyser(), len = c.sampleRate, nbuf = c.createBuffer(1, len, c.sampleRate), d = nbuf.getChannelData(0), i;
+  for (i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  comp.threshold.value = -18; comp.ratio.value = 5; comp.attack.value = .004; comp.release.value = .2;
+  mix.gain.value = 2.2; mix.connect(comp); comp.connect(master); master.connect(c.destination); master.connect(an);
+  master.gain.value = .0001; an.fftSize = 1024;
+  bgm = { c: c, master: master, mix: mix, an: an, nbuf: nbuf, next: c.currentTime + .08, step: 0 };
+  bgm.timer = setInterval(function () { if (bgmOn && !bgmDuck) bgmTick(); else { bgm.next = bgm.c.currentTime + .08; } }, 100);
+  bgmTick(); bgmApply(1.2);
 }
-function stopAmbient(dur, keepWanted) {
-  if (!keepWanted) ambWanted = false;
-  var a = amb; if (!a) return; amb = null; clearTimeout(a.timer);
-  var t = a.c.currentTime; try { a.master.gain.cancelScheduledValues(t); a.master.gain.setValueAtTime(Math.max(.0001, a.master.gain.value), t); a.master.gain.exponentialRampToValueAtTime(.0001, t + dur); } catch (e) {}
-  setTimeout(function () { a.nodes.forEach(function (n) { try { n.stop(); } catch (e) {} }); }, dur * 1000 + 300);
+/* untuk pengecekan: tingkat kekerasan BGM saat ini (0 = senyap) */
+window.__bgmLevel = function () { if (!bgm) return 0; var a = new Float32Array(bgm.an.fftSize), s2 = 0, i; bgm.an.getFloatTimeDomainData(a); for (i = 0; i < a.length; i++) s2 += a[i] * a[i]; return Math.sqrt(s2 / a.length); };
+function bgmSet(on) {
+  bgmOn = on; var b = $('bgmBtn');
+  muted = !on; b.textContent = on ? '🔊 BGM ON' : '🔇 BGM OFF'; b.classList.toggle('off', !on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  if (on) bgmStart(); else bgmApply(.4);
 }
-$('sndBtn').addEventListener('click', function () {
-  muted = !muted; this.textContent = muted ? '🔇' : '🔊';
-  if (muted) stopAmbient(.5, true); else { sfx.click(); if (ambWanted) startAmbient(); }
-});
+/* browser baru mengizinkan suara setelah layar disentuh: sentuhan pertama di mana saja menyalakan BGM */
+document.addEventListener('pointerdown', function () { var c = ac(); if (bgmOn && c) bgmStart(); }, { once: true, capture: true });
+$('bgmBtn').addEventListener('click', function () { ac(); bgmSet(!bgmOn); });
+
 
 /* ================= LANGIT BERBINTANG (ringan) ================= */
 var FX = [], COLS = ['255,217,138', '175,160,255', '127,224,207', '255,165,200'];
@@ -500,7 +545,7 @@ function makeScope(root, focus0) {
   requestAnimationFrame(loop);
   return { set: function (v, instant) { target = v; if (instant) focus = v; } };
 }
-var sc1 = makeScope($('scope1'), 80), sc2 = makeScope($('scope2'), 92);
+var sc1 = makeScope($('scope1'), 80);
 
 /* Panggung gambar mengikuti rasio asli gambar, jadi gambar tampil utuh (tidak terpotong, tidak gepeng) */
 function fitStage(stage, url) {
@@ -516,27 +561,15 @@ function fitStage(stage, url) {
   fit(); return fit;
 }
 document.querySelectorAll('.sbox').forEach(function (b) { b.addEventListener('pointerdown', function () { var h = b.querySelector('.ohint'); if (h) setTimeout(function () { h.classList.add('gone'); }, 1200); }); });
-var fit1 = fitStage($('scope1'), 'https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-Image-32yuo532yuo532yu.png'), fit2 = fitStage($('scope2'), 'https://i.ibb.co.com/8gN08svf/Gemini-Generated-Image-cw1d00cw1d00cw1d.png');
+var fit1 = fitStage($('scope1'), 'https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-Image-32yuo532yuo532yu.png');
 
-/* Gorila manis & marah: jumlah dan letaknya acak setiap kali halaman dibuka */
-function placeGorillas() {
-  var n = 5 + Math.floor(Math.random() * 4), pts = [], html = '', tries = 0, i, x, y, ok, kind;
-  while (pts.length < n && tries++ < 400) {
-    x = rnd(8, 92); y = rnd(10, 90); ok = true;
-    for (i = 0; i < pts.length; i++) if (Math.hypot(pts[i][0] - x, (pts[i][1] - y) * .6) < 15) { ok = false; break; }
-    if (ok) pts.push([x, y]);
-  }
-  pts.forEach(function (p, j) {
-    kind = j === 0 ? 0 : (j === 1 ? 1 : (Math.random() < .5 ? 0 : 1));   /* minimal 1 manis & 1 marah */
-    html += '<span class="gor" style="left:' + p[0].toFixed(1) + '%;top:' + p[1].toFixed(1) + '%">' + (kind ? '🦍💢' : '🦍🍌') + '</span>';
-  });
-  $('gors').innerHTML = html;
-}
+
 
 /* ================= NAVIGASI (halaman per halaman) ================= */
-var PAGES = ['intro', 'bet', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'lessonA', 'end'];
+var PAGES = ['intro', 'bet', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'end'];
 function go(id) {
   var own = { v1: 'video1', v2: 'video2' };
+  bgmDuck = (id === 'video1' || id === 'video2'); bgmApply(bgmDuck ? .8 : 2);
   ['v1', 'v2'].forEach(function (v) { try { if (!$(v).paused && id !== own[v]) $(v).pause(); } catch (e) {} });
   document.querySelectorAll('.page').forEach(function (p) { p.classList.toggle('active', p.id === 'pg-' + id); });
   $('bar').style.width = ((PAGES.indexOf(id) + 1) / PAGES.length * 100) + '%';
@@ -544,12 +577,22 @@ function go(id) {
   if (id === 'reveal') buildReveal();
   if (id === 'spot') { fit1(); $('cap1').textContent = focusCap(+$('focusRange').value); }
   if (id === 'video2') enterVideo2();
-  if (id === 'lessonA') enterLessonA();
   if (id === 'end') enterEnd();
 }
 
+/* tombol kembali */
+document.querySelectorAll('[data-back]').forEach(function (b) { b.addEventListener('click', function () { sfx.click(); go(b.dataset.back); }); });
 /* ================= 1-2 PEMBUKA & KEYAKINAN ================= */
-$('btnAccept').addEventListener('click', function () { ac(); sfx.click(); go('bet'); });
+function nameOk() { return $('nameIn').value.trim().length >= 2; }
+$('nameIn').addEventListener('input', function () { $('nameHint').classList.add('hidden'); this.classList.remove('err'); });
+$('nameIn').addEventListener('keydown', function (e) { if (e.key === 'Enter' && nameOk()) $('btnAccept').click(); });
+$('btnAccept').addEventListener('click', function () {
+  if (!nameOk()) { var ni = $('nameIn'); ni.classList.remove('err'); void ni.offsetWidth; ni.classList.add('err'); $('nameHint').classList.remove('hidden'); ni.focus(); sfx.click(); return; }
+  S.name = $('nameIn').value.trim().replace(/\s+/g, ' '); $('nameIn').blur(); pub();
+  $('hello').textContent = S.name; $('helloRow').classList.remove('hidden');
+  $('endName').textContent = ', ' + S.name;
+  ac(); sfx.click(); bgmStart(); go('bet');
+});
 $('bets').addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   S.bet = +b.dataset.v;
@@ -569,48 +612,74 @@ function wireVideo(o) {
   v.addEventListener('ended', function () { if (o.onEnded) o.onEnded(); });
   v.addEventListener('error', fail);
   $(o.start).addEventListener('click', function () {
+    if (o.v === 'v1') $('v1back').classList.add('hidden');
     ac(); sfx.click(); started = true; this.disabled = true; load.classList.remove('hidden');
     var p; try { p = v.play(); } catch (e) { fail(); return; }
     if (p && p.catch) p.catch(fail);
     timer = setTimeout(function () { if (v.paused || v.readyState < 3) fail(); }, 15000);
   });
 }
+/* popup distraksi saat video 1 berjalan */
+var POPS = [function () { return 'Hitung terus yaa! 🏀'; }, function () { return 'Fokus ya, ' + nm() + '! 👀'; }, function () { return 'Hayoo, udah berapa kali operan? 🤔'; }];
+var POS = [{ t: '5%', r: '-3deg' }, { t: '5%', r: '3deg' }, { t: '5%', r: '-2deg' }];
+var popShown = [false, false, false], popTimer = 0;
+function showPop(i) {
+  var el = $('vpop'), p = POS[i]; popShown[i] = true;
+  el.textContent = POPS[i](); el.style.top = p.t; el.style.setProperty('--rot', p.r);
+  el.classList.add('on'); clearTimeout(popTimer); popTimer = setTimeout(function () { el.classList.remove('on'); }, 3400);
+}
+$('v1').addEventListener('timeupdate', function () {
+  var d = this.duration, t = this.currentTime, th = (d && isFinite(d)) ? [d * .12, d * .42, d * .72] : [2.5, 10, 17], i;
+  for (i = 0; i < 3; i++) if (!popShown[i] && t >= th[i]) { showPop(i); break; }
+});
 var q1Go = false;
 wireVideo({
   v: 'v1', cover: 'vc1', load: 'vl1', err: 've1', link: 'v1link', start: 'v1start', src: CONFIG.video1,
-  onPlaying: function () { $('v1status').textContent = 'Hitung terus ya… jangan bersuara.'; },
-  onEnded: function () { if (q1Go) return; q1Go = true; sfx.lock(); $('v1status').textContent = 'Selesai! Sebentar lagi ada pertanyaan…'; setTimeout(function () { go('q1'); }, 900); }
+  onPlaying: function () { $('v1back').classList.add('hidden'); $('v1status').textContent = ''; },
+  onEnded: function () { if (q1Go) return; q1Go = true; $('vpop').classList.remove('on'); sfx.lock(); $('v1status').textContent = 'Selesai! Sebentar lagi ada pertanyaan…'; setTimeout(function () { go('q1'); }, 900); }
 });
 $('v1skip').addEventListener('click', function () { if (q1Go) return; q1Go = true; sfx.click(); go('q1'); });
 
 /* ================= 4-5 PERTANYAAN 1 & JAWABAN ================= */
 var preloaded = false;
 function preloadV2() { if (preloaded) return; preloaded = true; try { $('v2').preload = 'auto'; $('v2').load(); } catch (e) {} }
-$('q1opts').innerHTML = CONFIG.options.map(function (n) { return '<button class="opt" data-v="' + n + '"><b>' + n + 'x</b><small>kali</small></button>'; }).join('');
+$('q1opts').innerHTML = CONFIG.options.map(function (n) { return '<button class="opt" data-v="' + n + '"><b>' + n + '</b><small>kali</small></button>'; }).join('');
 $('q1opts').addEventListener('click', function (e) {
-  var b = e.target.closest('.opt'); if (!b || S.ans != null) return;
-  S.ans = +b.dataset.v; pub();
-  document.querySelectorAll('#q1opts .opt').forEach(function (x) { x.classList.toggle('sel', x === b); x.disabled = true; });
-  sfx.lock(); $('q1msg').textContent = '✨ Jawaban Anda tersimpan'; $('q1next').disabled = false;
+  var b = e.target.closest('.opt'); if (!b || q1Locked) return;
+  q1Pick = +b.dataset.v;
+  document.querySelectorAll('#q1opts .opt').forEach(function (x) { x.classList.toggle('sel', x === b); });
+  sfx.click(); $('q1msg').textContent = 'Pilihan kamu: ' + q1Pick + ' kali. Yakin? Tekan tombol di bawah 👇'; $('q1next').disabled = false;
 });
-$('q1next').addEventListener('click', function () { sfx.click(); go('reveal'); });
+var q1Pick = null, q1Locked = false;
+$('q1next').addEventListener('click', function () {
+  if (!q1Locked) {
+    if (q1Pick == null) return;
+    q1Locked = true; S.ans = q1Pick; pub();
+    document.querySelectorAll('#q1opts .opt').forEach(function (x) { x.disabled = true; });
+    sfx.lock(); $('q1msg').textContent = '✨ Jawaban kamu terkunci, ' + nm() + '!';
+  } else sfx.click();
+  go('reveal');
+});
 
-/* Pesan yang menyesuaikan jawaban yang dipilih */
+/* Branching 1: benar = apresiasi, salah = komparasi kiri (jawaban kamu) - kanan (jawaban benar) */
 function answerMsg(a, d) {
+  var n = nm();
   if (a == null) return 'Yuk, lihat jawaban yang benar.';
-  var arah = a > CONFIG.correct ? 'kelebihan' : 'kurang';
-  if (d === 0) return '🎯 <b>Tepat sekali!</b> Mata Anda jeli dan hitungan Anda rapi. Hebat!';
-  if (d === 1) return '👏 <b>Nyaris!</b> Anda menjawab ' + a + ' kali, hanya ' + arah + ' 1. Sedikit lagi tepat!';
-  if (d === 2) return '😊 <b>Lumayan dekat!</b> Anda menjawab ' + a + ' kali, ' + arah + ' 2. Bolanya memang cepat sekali.';
-  return '😄 Anda menjawab ' + a + ' kali, ' + arah + ' ' + d + '. <b>Tidak apa-apa</b>, video ini memang sengaja dibuat sulit.';
+  if (d === 0) return '🎉 <b>Hebat, ' + n + '!</b> Hitungan kamu benar, tepat ' + CONFIG.correct + ' kali. Mata kamu jeli banget, kayak mata elang! 🦅';
+  if (d === 1) return '👏 <b>Nyaris banget, ' + n + '!</b> Cuma selisih 1 operan. Sedikit lagi tepat!';
+  if (d === 2) return '😊 <b>Lumayan dekat, ' + n + '!</b> Selisih 2 operan. Bolanya memang cepat sekali.';
+  return '😄 <b>Tidak apa-apa, ' + n + '!</b> Selisih ' + d + ' operan. Video ini memang sengaja dibuat sulit.';
 }
+function countUp(el, to, ms) { var t0 = performance.now(); (function step(now) { var p = Math.min(1, (now - t0) / ms); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); })(t0); }
 function buildReveal() {
-  var d = Math.abs((S.ans == null ? CONFIG.correct : S.ans) - CONFIG.correct), el = $('r1num');
+  var a = S.ans == null ? CONFIG.correct : S.ans, d = Math.abs(a - CONFIG.correct), ok = d === 0;
+  $('rOne').classList.toggle('hidden', !ok); $('rCmp').classList.toggle('hidden', ok);
+  $('r1tag').textContent = ok ? 'TEPAT SEKALI! 🎉' : 'JAWABAN YANG BENAR';
   $('r1msg').innerHTML = answerMsg(S.ans, d);
-  $('r1bet').textContent = S.bet >= 4 ? (d === 0 ? 'Tadi Anda yakin (' + S.bet + ' dari 5), dan hasilnya cocok!' : 'Tadi Anda yakin (' + S.bet + ' dari 5). Yakin belum tentu benar ya 😊') : '';
-  sfx.reveal(); burst(el, 26);
-  var t0 = performance.now();
-  (function step(now) { var p = Math.min(1, (now - t0) / 1100); el.textContent = Math.round(CONFIG.correct * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); })(t0);
+  $('r1bet').textContent = S.bet >= 4 ? (ok ? 'Tadi kamu yakin (' + S.bet + ' dari 5), dan terbukti!' : 'Tadi kamu yakin (' + S.bet + ' dari 5). Yakin belum tentu benar ya 😊') : '';
+  sfx.reveal();
+  if (ok) { countUp($('r1num'), CONFIG.correct, 1100); burst($('r1num'), 40); setTimeout(shootNow, 300); }
+  else { countUp($('rYou'), a, 900); countUp($('rOk'), CONFIG.correct, 1100); burst($('rOk'), 26); }
 }
 $('revNext').addEventListener('click', function () { sfx.click(); go('spot'); });
 
@@ -627,64 +696,57 @@ $('spotNext').addEventListener('click', function () { sfx.click(); go('q2'); });
 /* ================= 7. PERTANYAAN 2 ================= */
 $('q2opts').addEventListener('click', function (e) {
   var b = e.target.closest('.opt'); if (!b || S.gorilla != null) return;
-  S.gorilla = b.dataset.v; pub();
-  document.querySelectorAll('#q2opts .opt').forEach(function (x) { x.classList.toggle('sel', x === b); x.disabled = true; });
-  sfx.lock(); burst(b, 16); $('q2msg').textContent = '✨ Jawaban Anda tersimpan'; $('q2next').disabled = false;
+  q2Pick = b.dataset.v;
+  document.querySelectorAll('#q2opts .opt').forEach(function (x) { x.classList.toggle('sel', x === b); });
+  sfx.click(); $('q2next').disabled = false;
 });
-$('q2next').addEventListener('click', function () { sfx.click(); go('video2'); });
+var q2Pick = null;
+function lockQ2() {
+  S.gorilla = q2Pick; pub();
+  document.querySelectorAll('#q2opts .opt').forEach(function (x) { x.disabled = true; });
+  sfx.lock(); burst(document.querySelector('#q2opts .opt.sel'), 16);
+  var fb = $('q2fb'), n = nm();
+  if (S.gorilla === 'ya') {
+    fb.className = 'fb';
+    fb.innerHTML = '🦍 <b>Mantap, ' + n + '!</b> Mata kamu awas, si gorila ketahuan! Biar makin yakin, yuk kita cek lagi videonya. Kali ini <b>fokus ke gorilanya</b> ya! 👀';
+    $('v2title').textContent = 'Fokus ke gorilanya ya, ' + n + '! 🦍';
+  } else {
+    fb.className = 'fb no';
+    fb.innerHTML = '🙈 <b>Wah, ' + n + ', padahal tadi gorilanya lumayan kelihatan lho!</b> Penasaran? Yuk kita lihat lagi, kali ini <b>cari si gorila</b> ya! 🔍';
+    $('v2title').textContent = 'Ayo ' + n + ', cari gorilanya! 🔍';
+  }
+  $('q2next').textContent = 'Tonton lagi ▶';
+}
+$('q2next').addEventListener('click', function () {
+  if (S.gorilla == null) { if (q2Pick) lockQ2(); return; }
+  sfx.click(); go('video2');
+});
 
 /* ================= 8. VIDEO 2 ================= */
 var v2Init = false;
 function enterVideo2() {
   if (v2Init) return; v2Init = true;
+  var v = $('v2'), st = CONFIG.video2Start;
+  function trim() { try { if (v.currentTime < st - .05) v.currentTime = st; } catch (e) {} }
+  ['loadedmetadata', 'play', 'seeked', 'timeupdate'].forEach(function (ev) { v.addEventListener(ev, trim); });
   wireVideo({
-    v: 'v2', cover: 'vc2', load: 'vl2', err: 've2', link: 'v2link', start: 'v2start', src: CONFIG.video2,
+    v: 'v2', cover: 'vc2', load: 'vl2', err: 've2', link: 'v2link', start: 'v2start', src: CONFIG.video2 + '#t=' + CONFIG.video2Start,
     onPlaying: function () { if ($('v2next').disabled) $('v2next').textContent = 'Perhatikan baik-baik… 👀'; },
     onEnded: function () { sfx.reveal(); v2Ready(); },
     onError: v2Ready
   });
 }
-function v2Ready() { $('v2next').disabled = false; $('v2next').textContent = 'Lanjut ke Pelajaran →'; }
-$('v2next').addEventListener('click', function () { sfx.click(); go('lessonA'); });
+function v2Ready() { $('v2next').disabled = false; $('v2next').textContent = 'Lanjut →'; }
+$('v2next').addEventListener('click', function () { sfx.click(); go('end'); });
 
-/* ================= 9-10. PELAJARAN ================= */
-var CAP_F = 'Hanya target yang terang. Keadaan tim dan sekitar jadi gelap.';
-var CAP_P = 'Target tetap terlihat, sekitarnya juga. Gorilanya ketemu!';
-function enterLessonA() {
-  startAmbient(); placeGorillas(); fit2();
-  $('cap2').textContent = $('tPeri').classList.contains('on') ? CAP_P : CAP_F;
-}
-$('tTunnel').addEventListener('click', function () {
-  $('tTunnel').classList.add('on'); $('tPeri').classList.remove('on'); $('scope2').classList.remove('peri'); sc2.set(92); sfx.click(); $('cap2').textContent = CAP_F;
-});
-$('tPeri').addEventListener('click', function () {
-  $('tPeri').classList.add('on'); $('tTunnel').classList.remove('on'); $('scope2').classList.add('peri'); sc2.set(14); sfx.bell(); burst($('scope2'), 24); $('cap2').textContent = CAP_P;
-});
-$('aNext').addEventListener('click', function () { sfx.click(); go('end'); });
 
-var flips = 0;
-function flipToggle(el) {
-  var was = el.classList.contains('on'); el.classList.toggle('on'); sfx.flip();
-  if (!was) { flips++; $('flipCount').textContent = flips + '/2'; burst(el, 14); if (flips === 2) setTimeout(sfx.bell, 500); }
-}
-document.querySelectorAll('.flip').forEach(function (f) {
-  f.addEventListener('click', function () { flipToggle(f); });
-  f.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipToggle(f); } });
-});
-
-/* ================= 10. INTINYA ================= */
-var CORE = 'Fokus pada target itu wajib. Tapi jangan sampai kita tidak peduli pada sekitar: keadaan tim dan situasi.';
-var coreBuilt = false;
+/* ================= 9. INTINYA ================= */
 function enterEnd() {
-  if (!coreBuilt) {
-    coreBuilt = true;
-    $('core').innerHTML = CORE.split(' ').map(function (w, i) { var k = /manis|peluang/i.test(w) ? ' k' : (/marah|masalah/i.test(w) ? ' r' : (/^(target|sekitar|tim|situasi)/i.test(w) ? ' c' : '')); return '<span class="w' + k + '" style="animation-delay:' + (i * .09).toFixed(2) + 's">' + w + '</span>'; }).join(' ');
-  }
-  $('core').classList.add('go');
+  $('endTitle').textContent = 'Intinya, ' + nm() + ' 😉';
+  var tk = $('takes'); tk.classList.remove('go'); void tk.offsetWidth; tk.classList.add('go');
   sfx.done(); burst($('pg-end').querySelector('.endstar'), 34); shootNow(); setTimeout(shootNow, 700);
-  setTimeout(function () { stopAmbient(5); }, 3000);
 }
-$('eBack').addEventListener('click', function () { sfx.click(); go('lessonA'); });
+$('eBack').addEventListener('click', function () { sfx.click(); go('video2'); });
 $('btnAgain').addEventListener('click', function () { location.reload(); });
 
 pub();
