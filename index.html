@@ -34,6 +34,8 @@ body{margin:0;width:100%;height:600px;overflow:hidden;overscroll-behavior:none;c
 .namein:focus{border-color:var(--acc);box-shadow:0 0 16px rgba(141,155,255,.45)}
 .namein::placeholder{color:var(--mut)}
 .pages{position:absolute;left:0;right:0;top:36px;bottom:16px;padding:0 10px 4px}
+.audiotip{position:absolute;left:50%;top:44px;transform:translateX(-50%);z-index:20;white-space:nowrap;font-size:13px;font-weight:700;color:#2a1c5c;background:linear-gradient(120deg,#ffe7a3,#ffc3e6);padding:6px 14px;border-radius:99px;box-shadow:0 8px 20px rgba(0,0,0,.35);pointer-events:none;animation:tipb 1.6s ease-in-out infinite}
+@keyframes tipb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}
 .copy{position:absolute;left:0;right:0;bottom:0;height:16px;font-size:10px;line-height:16px;text-align:center;color:rgba(214,220,255,.55);letter-spacing:.04em}
 .namein{font:inherit;font-size:17px;text-align:center;color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:14px;padding:10px 12px;width:100%;max-width:340px;align-self:center;outline:none}
 .namein:focus{border-color:var(--acc);box-shadow:0 0 16px rgba(141,155,255,.45)}
@@ -106,7 +108,23 @@ p{margin:0}
 .namein.err{border-color:var(--rose);box-shadow:0 0 16px rgba(255,159,200,.5);animation:shake .4s}
 @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 /* popup distraksi di atas video 1 */
-.vpop{position:absolute;z-index:2;left:0;right:0;margin:0 auto;width:max-content;max-width:86%;padding:8px 16px;border-radius:16px;font-weight:800;font-size:clamp(15px,4.2vw,19px);line-height:1.3;text-align:center;color:#2a1c5c;background:linear-gradient(120deg,#ffe7a3,#ffc3e6 60%,#bfe9ff);box-shadow:0 10px 26px rgba(0,0,0,.45),0 0 0 3px rgba(255,255,255,.35);pointer-events:none;opacity:0;transform:scale(.6) rotate(-4deg);transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.rdots{display:flex;gap:6px;justify-content:center}
+.rdots i{width:30px;height:6px;border-radius:6px;background:rgba(255,255,255,.15);transition:.4s}
+.rdots i.on{background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 10px rgba(141,155,255,.6)}
+.rcard{border-radius:22px;padding:20px 16px 18px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(141,155,255,.28),rgba(95,224,208,.1));box-shadow:0 14px 30px rgba(8,10,50,.4);display:flex;flex-direction:column;gap:8px}
+.rcard.in{animation:cardIn .55s cubic-bezier(.3,1.45,.5,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateX(46px) rotate(4deg) scale(.9)}to{opacity:1;transform:none}}
+.remo{align-self:center;width:max-content;font-size:64px;line-height:1.1;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+.rcard h2{font-size:clamp(22px,6vw,28px)}
+.rsub{font-size:16px;color:#e2e7ff;min-height:1.5em}
+.rcard.warn{background:linear-gradient(160deg,rgba(255,143,177,.32),rgba(255,217,138,.18));border-color:rgba(255,217,138,.7);box-shadow:0 0 30px rgba(255,217,138,.3)}
+.rcard.warn .remo{animation:warnp .9s ease-in-out infinite}
+@keyframes warnp{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.rbtns{display:flex;flex-direction:column;gap:8px;align-items:center}
+.rbtns .btn{min-width:220px}
+.btn.wig{animation:shake .45s}
+.vpop{position:absolute;z-index:2;margin:0;width:max-content;max-width:58%;padding:5px 11px;border-radius:13px;font-weight:800;font-size:clamp(12px,3.3vw,15px);line-height:1.3;text-align:center;color:#2a1c5c;background:linear-gradient(120deg,#ffe7a3,#ffc3e6 60%,#bfe9ff);box-shadow:0 10px 26px rgba(0,0,0,.45),0 0 0 3px rgba(255,255,255,.35);pointer-events:none;opacity:0;transform:scale(.6) rotate(-4deg);transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1)}
 .vpop.on{opacity:1;transform:scale(1) rotate(var(--rot,-2deg));animation:wob 1.1s ease-in-out .35s infinite}
 @keyframes wob{0%,100%{transform:scale(1) rotate(var(--rot,-2deg))}50%{transform:scale(1.06) rotate(calc(var(--rot,-2deg) * -1))}}
 /* komparasi jawaban */
@@ -204,6 +222,7 @@ p{margin:0}
     <button class="snd bgm" id="bgmBtn" aria-label="Suara dan musik latar" aria-pressed="true">🔊 BGM ON</button>
   </div>
 
+  <div class="audiotip hidden" id="audioTip">🔊 Ketuk layar untuk menyalakan musik</div>
   <div class="pages">
 
     <!-- 1. PEMBUKA -->
@@ -237,6 +256,20 @@ p{margin:0}
       <div class="pfoot"><button class="btn ghost back" data-back="intro" aria-label="Kembali">←<span class="bk"> Kembali</span></button><button class="btn" id="btnBet" disabled>Simpan Pilihan ✔</button></div>
     </section>
 
+    <!-- 2b. KONFIRMASI (distraksi sebelum video) -->
+    <section class="page" id="pg-ready">
+      <div class="pbody">
+        <div class="rdots" id="rDots"><i></i><i></i><i></i><i></i></div>
+        <div class="rcard" id="rCard">
+          <div class="remo" id="rEmo">🤔</div>
+          <h2 id="rQ"></h2>
+          <p class="rsub" id="rSub"></p>
+        </div>
+        <div class="rbtns" id="rBtns"></div>
+      </div>
+      <div class="pfoot"><button class="btn ghost back" data-back="bet" aria-label="Kembali">←<span class="bk"> Kembali</span></button></div>
+    </section>
+
     <!-- 3. VIDEO 1 -->
     <section class="page" id="pg-video1">
       <div class="pbody fill">
@@ -257,7 +290,7 @@ p{margin:0}
           </div>
         </div>
       </div>
-      <div class="vfoot"><button class="btn ghost back" id="v1back" data-back="bet" aria-label="Kembali">←<span class="bk"> Kembali</span></button><p class="vstatus" id="v1status">Tekan tombol kalau kamu sudah siap.</p></div>
+      <div class="vfoot"><button class="btn ghost back" id="v1back" data-back="ready" aria-label="Kembali">←<span class="bk"> Kembali</span></button><p class="vstatus" id="v1status">Tekan tombol kalau kamu sudah siap.</p></div>
     </section>
 
     <!-- 4. PERTANYAAN 1 -->
@@ -463,10 +496,25 @@ window.__bgmLevel = function () { if (!bgm) return 0; var a = new Float32Array(b
 function bgmSet(on) {
   bgmOn = on; var b = $('bgmBtn');
   muted = !on; b.textContent = on ? '🔊 BGM ON' : '🔇 BGM OFF'; b.classList.toggle('off', !on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
-  if (on) bgmStart(); else bgmApply(.4);
+  if (on) bgmStart(); else { bgmApply(.4); $('audioTip').classList.add('hidden'); }
 }
 /* browser baru mengizinkan suara setelah layar disentuh: sentuhan pertama di mana saja menyalakan BGM */
-document.addEventListener('pointerdown', function () { var c = ac(); if (bgmOn && c) bgmStart(); }, { once: true, capture: true });
+/* Autoplay BGM: coba langsung saat game dibuka. Kalau browser memblokir suara sebelum ada sentuhan,
+   musik menyala otomatis pada sentuhan/ketikan pertama di mana saja. */
+var UNLOCK = ['pointerdown', 'touchend', 'click', 'keydown'];
+function audioRunning() { return actx && actx.state === 'running'; }
+function unlockAudio() {
+  var c = ac(); if (!c) return;
+  if (bgmOn) bgmStart();
+  var p = c.resume ? c.resume() : null;
+  function done() { if (audioRunning()) { $('audioTip').classList.add('hidden'); UNLOCK.forEach(function (ev) { document.removeEventListener(ev, unlockAudio, true); }); } }
+  if (p && p.then) p.then(done, function () {}); else done();
+}
+UNLOCK.forEach(function (ev) { document.addEventListener(ev, unlockAudio, true); });
+function tryAutoplay() {
+  if (bgmOn) bgmStart();
+  setTimeout(function () { if (bgmOn && !audioRunning()) $('audioTip').classList.remove('hidden'); else unlockAudio(); }, 700);
+}
 $('bgmBtn').addEventListener('click', function () { ac(); bgmSet(!bgmOn); });
 
 
@@ -566,10 +614,10 @@ var fit1 = fitStage($('scope1'), 'https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-
 
 
 /* ================= NAVIGASI (halaman per halaman) ================= */
-var PAGES = ['intro', 'bet', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'end'];
+var PAGES = ['intro', 'bet', 'ready', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'end'];
 function go(id) {
   var own = { v1: 'video1', v2: 'video2' };
-  bgmDuck = (id === 'video1' || id === 'video2'); bgmApply(bgmDuck ? .8 : 2);
+  bgmDuck = (id === 'video2'); bgmApply(bgmDuck ? .8 : 2);
   ['v1', 'v2'].forEach(function (v) { try { if (!$(v).paused && id !== own[v]) $(v).pause(); } catch (e) {} });
   document.querySelectorAll('.page').forEach(function (p) { p.classList.toggle('active', p.id === 'pg-' + id); });
   $('bar').style.width = ((PAGES.indexOf(id) + 1) / PAGES.length * 100) + '%';
@@ -577,6 +625,7 @@ function go(id) {
   if (id === 'reveal') buildReveal();
   if (id === 'spot') { fit1(); $('cap1').textContent = focusCap(+$('focusRange').value); }
   if (id === 'video2') enterVideo2();
+  if (id === 'ready') enterReady();
   if (id === 'end') enterEnd();
 }
 
@@ -599,7 +648,43 @@ $('bets').addEventListener('click', function (e) {
   document.querySelectorAll('#bets button').forEach(function (x) { x.classList.toggle('sel', x === b); });
   $('btnBet').disabled = false; sfx.click();
 });
-$('btnBet').addEventListener('click', function () { sfx.lock(); pub(); go('video1'); });
+$('btnBet').addEventListener('click', function () { sfx.lock(); pub(); go('ready'); });
+
+/* ================= 2b. KONFIRMASI SEBELUM VIDEO (distraksi) ================= */
+var READY = [
+  { emo: '🤔', q: function () { return 'Sudah siap belum, ' + nm() + '?'; }, sub: 'Sebentar lagi videonya diputar…',
+    btns: [{ t: 'Siap dong! 💪', go: 1 }, { t: 'Belum 😅', tease: true, ghost: true }] },
+  { emo: '🎯', q: function () { return 'Fokus ya!'; }, sub: 'Jangan sampai matamu lepas dari bola.',
+    btns: [{ t: 'Oke, aku fokus! 👀', go: 2 }] },
+  { emo: '🏀', q: function () { return 'Beneran dihitung ya!'; }, sub: 'Hitung <span class="hl">bola basket</span> yang dioper tim <span class="hl">kaos putih</span>.',
+    btns: [{ t: 'Siap, aku hitung! 🔢', go: 3 }] },
+  { emo: '⚠️', warn: true, q: function () { return 'Pastikan jawaban kamu benar ya!'; }, sub: 'Agar kamu bisa melanjutkan ke <b>misi-misi berikutnya</b>. 🚀',
+    btns: [{ t: '▶ Siap, putar videonya!', go: 'video' }] }
+];
+var TEASE = ['Ayo dong, kamu pasti bisa! 😄', 'Masa sih belum? Coba tarik napas dulu… 😌', 'Oke, anggap sudah siap ya! 😆'], teaseN = 0;
+function readyStep(i) {
+  var st = READY[i], card = $('rCard');
+  document.querySelectorAll('#rDots i').forEach(function (d, k) { d.classList.toggle('on', k <= i); });
+  card.classList.toggle('warn', !!st.warn); card.classList.remove('in'); void card.offsetWidth; card.classList.add('in');
+  $('rEmo').textContent = st.emo; $('rQ').textContent = st.q(); $('rSub').innerHTML = st.sub;
+  $('rBtns').innerHTML = '';
+  st.btns.forEach(function (b) {
+    var el = document.createElement('button'); el.className = 'btn' + (b.ghost ? ' ghost' : ''); el.textContent = b.t;
+    el.addEventListener('click', function () {
+      if (b.tease) {
+        $('rSub').textContent = TEASE[Math.min(teaseN, TEASE.length - 1)];
+        el.classList.remove('wig'); void el.offsetWidth; el.classList.add('wig'); sfx.flip();
+        if (++teaseN >= TEASE.length) setTimeout(function () { readyStep(1); }, 900);
+        return;
+      }
+      if (b.go === 'video') { sfx.lock(); go('video1'); $('v1start').click(); return; }   /* langsung putar (masih dalam ketukan yang sama) */
+      sfx.click(); burst(el, 14); readyStep(b.go);
+    });
+    $('rBtns').appendChild(el);
+  });
+  if (st.warn) sfx.bell();
+}
+function enterReady() { teaseN = 0; readyStep(0); }
 
 /* ================= VIDEO ================= */
 function wireVideo(o) {
@@ -620,17 +705,36 @@ function wireVideo(o) {
   });
 }
 /* popup distraksi saat video 1 berjalan */
-var POPS = [function () { return 'Hitung terus yaa! 🏀'; }, function () { return 'Fokus ya, ' + nm() + '! 👀'; }, function () { return 'Hayoo, udah berapa kali operan? 🤔'; }];
-var POS = [{ t: '5%', r: '-3deg' }, { t: '5%', r: '3deg' }, { t: '5%', r: '-2deg' }];
-var popShown = [false, false, false], popTimer = 0;
+var POPS = [
+  function () { return 'Hitung terus yaa! 🏀'; },
+  function () { return 'Fokus ya, ' + nm() + '! 👀'; },
+  function () { return 'Jangan sampai kelewat! ⚡'; },
+  function () { return 'Hayoo, udah berapa kali operan? 🤔'; },
+  function () { return 'Sedikit lagi, tetap hitung! 💪'; }
+];
+/* sudut gambar video: kiri-atas, kanan-bawah, kanan-atas, kiri-bawah, kiri-atas */
+var CORNER = [['l', 't', '-4deg'], ['r', 'b', '3deg'], ['r', 't', '4deg'], ['l', 'b', '-3deg'], ['l', 't', '3deg']];
+var POP_AT = [.07, .25, .43, .61, .79], POP_FALLBACK = [1.5, 5.5, 9.5, 13.5, 17.5];
+var popShown = [false, false, false, false, false], popTimer = 0;
+function videoRect() {   /* posisi gambar video yang sebenarnya di dalam bingkai (object-fit: contain) */
+  var v = $('v1'), W = $('vw1').clientWidth, H = $('vw1').clientHeight, w = W, h = H;
+  if (v.videoWidth && v.videoHeight) { var r = v.videoWidth / v.videoHeight; if (W / H > r) { w = H * r; } else { h = W / r; } }
+  return { x: (W - w) / 2, y: (H - h) / 2 };
+}
 function showPop(i) {
-  var el = $('vpop'), p = POS[i]; popShown[i] = true;
-  el.textContent = POPS[i](); el.style.top = p.t; el.style.setProperty('--rot', p.r);
-  el.classList.add('on'); clearTimeout(popTimer); popTimer = setTimeout(function () { el.classList.remove('on'); }, 3400);
+  var el = $('vpop'), c = CORNER[i], o = videoRect(), gap = 8; popShown[i] = true;
+  el.classList.remove('on');
+  el.textContent = POPS[i]();
+  el.style.left = c[0] === 'l' ? (o.x + gap) + 'px' : 'auto'; el.style.right = c[0] === 'r' ? (o.x + gap) + 'px' : 'auto';
+  el.style.top = c[1] === 't' ? (o.y + gap) + 'px' : 'auto'; el.style.bottom = c[1] === 'b' ? (o.y + gap) + 'px' : 'auto';
+  el.style.transformOrigin = (c[0] === 'l' ? 'left ' : 'right ') + (c[1] === 't' ? 'top' : 'bottom');
+  el.style.setProperty('--rot', c[2]);
+  void el.offsetWidth; el.classList.add('on');
+  clearTimeout(popTimer); popTimer = setTimeout(function () { el.classList.remove('on'); }, 2800);
 }
 $('v1').addEventListener('timeupdate', function () {
-  var d = this.duration, t = this.currentTime, th = (d && isFinite(d)) ? [d * .12, d * .42, d * .72] : [2.5, 10, 17], i;
-  for (i = 0; i < 3; i++) if (!popShown[i] && t >= th[i]) { showPop(i); break; }
+  var d = this.duration, t = this.currentTime, ok = d && isFinite(d), i;
+  for (i = 0; i < POPS.length; i++) if (!popShown[i] && t >= (ok ? d * POP_AT[i] : POP_FALLBACK[i])) { showPop(i); break; }
 });
 var q1Go = false;
 wireVideo({
@@ -750,6 +854,7 @@ $('eBack').addEventListener('click', function () { sfx.click(); go('video2'); })
 $('btnAgain').addEventListener('click', function () { location.reload(); });
 
 pub();
+tryAutoplay();
 go('intro');
 })();
 </script>
