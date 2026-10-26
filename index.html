@@ -617,7 +617,7 @@ var fit1 = fitStage($('scope1'), 'https://i.ibb.co.com/SWNc5RJ/Gemini-Generated-
 var PAGES = ['intro', 'bet', 'ready', 'video1', 'q1', 'reveal', 'spot', 'q2', 'video2', 'end'];
 function go(id) {
   var own = { v1: 'video1', v2: 'video2' };
-  bgmDuck = (id === 'video2'); bgmApply(bgmDuck ? .8 : 2);
+  bgmDuck = false;   /* BGM tetap menyala di semua halaman, termasuk saat video diputar */ bgmApply(bgmDuck ? .8 : 2);
   ['v1', 'v2'].forEach(function (v) { try { if (!$(v).paused && id !== own[v]) $(v).pause(); } catch (e) {} });
   document.querySelectorAll('.page').forEach(function (p) { p.classList.toggle('active', p.id === 'pg-' + id); });
   $('bar').style.width = ((PAGES.indexOf(id) + 1) / PAGES.length * 100) + '%';
